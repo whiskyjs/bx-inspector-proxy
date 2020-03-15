@@ -14,35 +14,32 @@ const bind = (server) => {
 
             socket.timestamp = +(new Date());
 
-            console.log("Connection.", socket.timestamp);
-
             replyWith({
                 uuid: socket.uuid,
             });
         });
 
         socket.on('disconnect', () => {
-            // Не делаем ничего
         });
     });
 
     const findClient = (prop, value) => {
-        Object.keys(subscribers.connected).forEach((socketId) => {
+        for (let socketId of Object.keys(subscribers.connected)) {
             if (subscribers.connected[socketId][prop] === value) {
                 return subscribers.connected[socketId];
             }
-        });
+        }
     };
 
-    const emit = (uuid, data) => {
+    const emit = (uuid, type, data) => {
         return new Promise((resolve, reject) => {
             const client = findClient("uuid", uuid);
 
             if (!client) {
-                reject("¯\\_(ツ)_/¯");
+                reject(`Subscriber ${uuid} not found in connection registry.`);
             }
 
-            client.emit("message:external", data, (response) => {
+            client.emit(type, {...data, action: type}, (response) => {
                 resolve(response);
             });
         });
