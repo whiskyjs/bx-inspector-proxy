@@ -2,7 +2,7 @@
 
 ## BX-Inspector-Proxy
 
-Вспомогательный websocket-сервер для [graphql-api](https://github.com/whiskyjs/graphql-api) и [bx-inspector](https://github.com/whiskyjs/bx-inspector).
+Вспомогательный websocket-сервер для [bx-graphql-api](https://github.com/whiskyjs/bx-graphql-api) и [bx-inspector](https://github.com/whiskyjs/bx-inspector).
 
 ### Лицензия
 
